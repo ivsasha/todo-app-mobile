@@ -7,7 +7,7 @@ type FormTodoProps = {
   changeComplite: () => void;
   todos: Todo[];
   isDisabledInput: boolean;
-  inputRef: React.RefObject<HTMLInputElement>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
   searchTerm: string;
   setSearchTerm: (value: string) => void;
 };
@@ -49,7 +49,9 @@ export const FormTodo: React.FC<FormTodoProps> = ({
           e.preventDefault();
           try {
             await postTodos(searchTerm);
-          } catch (error) {}
+          } catch (error) {
+            console.error(error);
+          }
         }}
       >
         <input
