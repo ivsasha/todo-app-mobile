@@ -1,37 +1,48 @@
-import { storage } from "./Storage";
+import { db } from "../firebase";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  deleteDoc,
+  updateDoc,
+  query,
+  where,
+} from "firebase/firestore";
 import { Todo } from "../types/Todo";
 
-const TASKS_KEY = "tasks";
-
-function wait(delay: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay);
-  });
-}
+const tasksRef = collection(db, "tasks");
 
 export const TaskService = {
-  async getAll(): Promise<Todo[]> {
-    const tasks = await storage.get(TASKS_KEY);
-    await wait(200);
-    return tasks || [];
+  // отримати всі завдання тільки для поточного користувача
+  async add(task: Omit<Todo, "id">): Promise<string> {
+    const docRef = await addDoc(tasksRef, task);
+
+    return docRef.id; // повертаємо правильний id
   },
-  async add(task: Todo) {
-    const tasks = await TaskService.getAll();
-    tasks.push(task);
-    await wait(200);
-    await storage.set(TASKS_KEY, tasks);
+
+  // отримати всі
+  async getAll(userId: string): Promise<Todo[]> {
+    const q = query(tasksRef, where("userId", "==", userId));
+    const snapshot = await getDocs(q);
+
+    return snapshot.docs.map((d) => ({
+      id: d.id, // беремо id документа з Firestore
+      ...(d.data() as Omit<Todo, "id">),
+    }));
   },
+
   async update(task: Todo) {
-    const tasks = await TaskService.getAll();
-    const index = tasks.findIndex((t) => t.id === task.id);
-    if (index > -1) tasks[index] = task;
-    await wait(200);
-    await storage.set(TASKS_KEY, tasks);
+    const docRef = doc(db, "tasks", task.id);
+    await updateDoc(docRef, {
+      title: task.title,
+      completed: task.completed,
+      userId: task.userId,
+    });
   },
+
   async remove(id: string) {
-    let tasks = await TaskService.getAll();
-    tasks = tasks.filter((t) => t.id !== id);
-    await wait(200);
-    await storage.set(TASKS_KEY, tasks);
+    const docRef = doc(db, "tasks", id);
+    await deleteDoc(docRef);
   },
 };

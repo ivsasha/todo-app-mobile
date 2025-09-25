@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "189432636226",
+    "firebase_url": "https://todo-list-kkn-iog-default-rtdb.firebaseio.com",
+    "project_id": "todo-list-kkn-iog",
+    "storage_bucket": "todo-list-kkn-iog.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189432636226:android:5c00b7b972779b849c9edb",
+        "android_client_info": {
+          "package_name": "io.kkn_iog.lab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189432636226-e8jcra4617afr1jah91sv9o8qvl8kr0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEoXqHyEVtILyrrBpUVgnb0Wj9EBtJdEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189432636226-e8jcra4617afr1jah91sv9o8qvl8kr0a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

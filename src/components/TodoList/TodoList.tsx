@@ -5,11 +5,7 @@ import classNames from "classnames";
 type TodoListProps = {
   todos: Todo[];
   deleteTodo: (userId: string) => Promise<void>;
-  changeTodo: (
-    todoId: string,
-    title: string,
-    complet: boolean
-  ) => Promise<void>;
+  changeTodo: (todo: Todo) => Promise<void>;
 };
 
 export const TodoList: React.FC<TodoListProps> = ({
@@ -17,13 +13,13 @@ export const TodoList: React.FC<TodoListProps> = ({
   deleteTodo,
   changeTodo,
 }) => {
-  const [isEditingId, setIsEditingId] = useState('0');
+  const [isEditingId, setIsEditingId] = useState("0");
   const [title, setTitle] = useState("");
-  const [isLoadingId, setIsLoadingId] = useState('0');
+  const [isLoadingId, setIsLoadingId] = useState("0");
   const editInput = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (isEditingId !== '0') {
+    if (isEditingId !== "0") {
       setTimeout(() => {
         editInput.current?.focus();
       }, 0);
@@ -40,11 +36,11 @@ export const TodoList: React.FC<TodoListProps> = ({
       setIsLoadingId(isEditingId);
       deleteTodo(isEditingId)
         .then(() => {
-          setIsLoadingId('0');
-          setIsEditingId('0');
+          setIsLoadingId("0");
+          setIsEditingId("0");
         })
         .catch(() => {
-          setIsLoadingId('0');
+          setIsLoadingId("0");
         });
 
       return;
@@ -55,19 +51,19 @@ export const TodoList: React.FC<TodoListProps> = ({
         todos.find((todo) => todo.id === isEditingId)?.title.trim() ||
       title.trim() === ""
     ) {
-      setIsEditingId('0');
+      setIsEditingId("0");
 
       return;
     }
 
     setIsLoadingId(item.id);
-    changeTodo(item.id, title.trim(), item.completed)
+    changeTodo({ ...item, title: title.trim() })
       .then(() => {
-        setIsEditingId('0');
+        setIsEditingId("0");
       })
       .catch(() => {})
       .finally(() => {
-        setIsLoadingId('0');
+        setIsLoadingId("0");
       });
   };
 
@@ -92,13 +88,13 @@ export const TodoList: React.FC<TodoListProps> = ({
               checked={item.completed}
               onChange={() => {
                 setIsLoadingId(item.id);
-                changeTodo(item.id, item.title, !item.completed).finally(() => {
-                  setIsLoadingId('0');
+                changeTodo({ ...item, completed: !item.completed }).finally(() => {
+                  setIsLoadingId("0");
                 });
               }}
             />
           </label>
-          {(item.id === '0' || isEditingId !== item.id) && (
+          {(item.id === "0" || isEditingId !== item.id) && (
             <span
               data-cy="TodoTitle"
               className="todo__title"
@@ -125,7 +121,7 @@ export const TodoList: React.FC<TodoListProps> = ({
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Escape") {
-                    setIsEditingId('0');
+                    setIsEditingId("0");
                   }
                 }}
                 ref={editInput}
@@ -138,7 +134,8 @@ export const TodoList: React.FC<TodoListProps> = ({
           <div
             data-cy="TodoLoader"
             className={classNames("modal", "overlay", {
-              "is-active": isLoadingId === item.id || item.id === String(Date.now()),
+              "is-active":
+                isLoadingId === item.id || item.id === String(Date.now()),
               hidden: isLoadingId !== item.id,
             })}
           >
@@ -153,7 +150,7 @@ export const TodoList: React.FC<TodoListProps> = ({
               onClick={() => {
                 setIsLoadingId(item.id);
                 deleteTodo(item.id).finally(() => {
-                  setIsLoadingId('0');
+                  setIsLoadingId("0");
                 });
               }}
             >

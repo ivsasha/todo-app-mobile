@@ -30,7 +30,6 @@ export const FooterTodos: React.FC<FooterTodosProps> = ({
         {Object.values(Filter).map(type => (
           <a
             key={type}
-            href={`#/${type.toLowerCase()}`}
             className={classNames('filter__link', {
               selected: selected === type,
             })}

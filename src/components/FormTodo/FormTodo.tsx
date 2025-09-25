@@ -6,7 +6,6 @@ type FormTodoProps = {
   postTodos: (s: string) => void;
   changeComplite: () => void;
   todos: Todo[];
-  isDisabledInput: boolean;
   inputRef: React.RefObject<HTMLInputElement | null>;
   searchTerm: string;
   setSearchTerm: (value: string) => void;
@@ -16,7 +15,6 @@ export const FormTodo: React.FC<FormTodoProps> = ({
   postTodos,
   changeComplite,
   todos,
-  isDisabledInput,
   inputRef,
   searchTerm,
   setSearchTerm,
@@ -49,6 +47,7 @@ export const FormTodo: React.FC<FormTodoProps> = ({
           e.preventDefault();
           try {
             await postTodos(searchTerm);
+            setSearchTerm("");
           } catch (error) {
             console.error(error);
           }
@@ -62,7 +61,6 @@ export const FormTodo: React.FC<FormTodoProps> = ({
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           ref={inputRef}
-          disabled={isDisabledInput}
         />
       </form>
     </header>
