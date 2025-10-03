@@ -21,7 +21,7 @@
   }
 
   &.completed &__status-label {
-    background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23bddad5%22%20stroke-width%3D%223%22/%3E%3Cpath%20fill%3D%22%235dc2af%22%20d%3D%22M72%2025L42%2071%2027%2056l-4%204%2020%2020%2034-52z%22/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23C9BABA%22%20stroke-width%3D%223%22/%3E%3Cpath%20fill%3D%22%23B89B9B%22%20d%3D%22M72%2025L42%2071%2027%2056l-4%204%2020%2020%2034-52z%22/%3E%3C/svg%3E");
   }
 
   &__status {
@@ -36,8 +36,29 @@
   }
 
   &.completed &__title {
-    color: #cc9a9a;
+    color: #b89b9b;
     text-decoration: line-through;
+  }
+
+  &__details {
+    position: absolute;
+    right: 30px;
+    top: 12px;
+    bottom: 0;
+
+    font-size: 80%;
+
+    border: 0;
+    background: none;
+    cursor: pointer;
+
+    transform: translateY(-2px);
+    opacity: 0;
+    transition: transform 0.2s ease-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 
   &__remove {
@@ -50,7 +71,7 @@
     line-height: 1;
     font-family: inherit;
     font-weight: inherit;
-    color: #cc9a9a;
+    color: #c67b7b;
 
     float: right;
     border: 0;
@@ -59,14 +80,19 @@
 
     transform: translateY(-2px);
     opacity: 0;
-    transition: color 0.2s ease-out;
+    transition: all 0.2s ease-out;
 
     &:hover {
-      color: #af5b5e;
+      color: #a55d5d;
+      transform: scale(1.1);
     }
   }
 
   &:hover &__remove {
+    opacity: 1;
+  }
+
+  &:hover &__details {
     opacity: 1;
   }
 

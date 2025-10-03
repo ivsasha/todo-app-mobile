@@ -20,6 +20,7 @@ type Props = {
   inputRef: React.RefObject<HTMLInputElement | null>;
   searchTerm: string;
   setSearchTerm: (s: string) => void;
+  handleListener: () => Promise<void>;
 }
 
 export const MainTodos: React.FC<Props> = ({
@@ -37,6 +38,7 @@ export const MainTodos: React.FC<Props> = ({
   inputRef,
   searchTerm,
   setSearchTerm,
+  handleListener
 }) => {
   return (
     <>
@@ -49,6 +51,7 @@ export const MainTodos: React.FC<Props> = ({
           inputRef={inputRef}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          handleListener={handleListener}
         />
 
         {todos.length > 0 && (

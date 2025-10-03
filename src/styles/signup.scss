@@ -10,14 +10,14 @@
 
   &__error {
     margin-top: 1rem;
-    color: #d9534f;
+    color: #c67b7b;
     font-size: 0.9rem;
     font-weight: 500;
     text-align: center;
-    background: #fbeaea;
+    background: #fbf0f0;
     padding: 0.5rem 1rem;
     border-radius: 8px;
-    border: 1px solid #f5c6cb;
+    border: 1px solid #edd5d5;
     animation: fadeIn 0.3s ease;
   }
 
@@ -38,7 +38,7 @@
 
     &:hover {
       text-decoration: underline;
-      color: #cc9a9a;
+      color: #b89b9b;
     }
   }
 
@@ -63,7 +63,7 @@
 
     &:hover {
       text-decoration: underline;
-      color: #cc9a9a;
+      color: #b89b9b;
     }
   }
 
@@ -83,7 +83,7 @@
       outline: none;
 
       &:focus {
-        border-color: #cc9a9a;
+        border-color: #b89b9b;
       }
     }
   }
@@ -91,7 +91,7 @@
   &__button {
     width: 100%;
     margin-top: 2rem;
-    background: #000;
+    background: #b89b9b;
     color: #fff;
     padding: 1rem;
     border-radius: 999px;
@@ -100,7 +100,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: #cc9a9a;
+      background-color: #d4afaf;
     }
   }
 

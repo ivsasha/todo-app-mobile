@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Todo } from "../../types/Todo";
 import classNames from "classnames";
+import { Link } from "react-router-dom";
 
 type TodoListProps = {
   todos: Todo[];
@@ -88,9 +89,11 @@ export const TodoList: React.FC<TodoListProps> = ({
               checked={item.completed}
               onChange={() => {
                 setIsLoadingId(item.id);
-                changeTodo({ ...item, completed: !item.completed }).finally(() => {
-                  setIsLoadingId("0");
-                });
+                changeTodo({ ...item, completed: !item.completed }).finally(
+                  () => {
+                    setIsLoadingId("0");
+                  }
+                );
               }}
             />
           </label>
@@ -143,19 +146,28 @@ export const TodoList: React.FC<TodoListProps> = ({
             <div className="loader" />
           </div>
           {isEditingId !== item.id && (
-            <button
-              type="button"
-              className="todo__remove"
-              data-cy="TodoDelete"
-              onClick={() => {
-                setIsLoadingId(item.id);
-                deleteTodo(item.id).finally(() => {
-                  setIsLoadingId("0");
-                });
-              }}
-            >
-              ×
-            </button>
+            <>
+              <button
+                type="button"
+                className="todo__remove"
+                data-cy="TodoDelete"
+                onClick={() => {
+                  setIsLoadingId(item.id);
+                  deleteTodo(item.id).finally(() => {
+                    setIsLoadingId("0");
+                  });
+                }}
+              >
+                ×
+              </button>
+              <Link
+                type="button"
+                className="todo__details"
+                to={`/details/${item.id}`}
+              >
+                📝
+              </Link>
+            </>
           )}
         </div>
       ))}

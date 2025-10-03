@@ -1,0 +1,130 @@
+.custom-modal-overlay {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 9999; // вище ніж інші
+  padding: 20px;
+  animation: fade-in 0.3s ease-out;
+  overflow: auto;
+}
+
+.custom-modal {
+  display: block !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  background: linear-gradient(135deg, #b69e9e 0%, #f7cdcd 100%);
+  color: #f1f2f9;
+  padding: 32px;
+  border-radius: 16px;
+  max-width: 420px;
+  width: 100%;
+  height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+  animation: modal-appear 0.3s ease-out;
+  margin: auto;
+}
+
+.custom-modal p {
+  font-family: Mont, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #ffffff;
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+
+.custom-modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.custom-modal-buttons button {
+  font-family: Mont, sans-serif;
+  flex: 1;
+  padding: 14px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: none;
+  outline: none;
+}
+
+.custom-modal-buttons button:first-child {
+  background: white;
+  color: #c67b7b;
+  border: 2px solid #c67b7b;
+}
+
+.custom-modal-buttons button:last-child {
+  background: linear-gradient(135deg, #d99595 0%, #c67b7b 100%);
+  color: white;
+}
+
+.custom-modal-buttons button:first-child:hover {
+  background: linear-gradient(135deg, #d99595 0%, #c67b7b 100%);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(198, 123, 123, 0.3);
+}
+
+.custom-modal-buttons button:last-child:hover {
+  background: white;
+  color: #c67b7b;
+  border: 2px solid #c67b7b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(198, 123, 123, 0.3);
+}
+
+.custom-modal-buttons button:active {
+  transform: translateY(0);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Scrollbar */
+.custom-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-modal::-webkit-scrollbar-track {
+  background: #374151;
+  border-radius: 10px;
+}
+
+.custom-modal::-webkit-scrollbar-thumb {
+  background: #6b7280;
+  border-radius: 10px;
+}
+
+.custom-modal::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}

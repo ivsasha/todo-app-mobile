@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Todo } from "../types/Todo";
 import { TaskService } from "../services/TaskService";
 
-export const useTodos = (userId: string | null) => {
+export const useTodos = (userId: string | null, refreshKey: string) => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [error, setError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -15,7 +15,7 @@ export const useTodos = (userId: string | null) => {
     TaskService.getAll(userId)
       .then(setTodos)
       .catch(() => setError("Unable to load todos"));
-  }, [userId]);
+  }, [userId, refreshKey]);
 
   const addTodo = async (title: string) => {
     if (!userId) return;

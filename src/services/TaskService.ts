@@ -10,13 +10,17 @@ import {
   where,
 } from "firebase/firestore";
 import { Todo } from "../types/Todo";
+import { vibrateOnAction } from "./vibration";
 
 const tasksRef = collection(db, "tasks");
+
 
 export const TaskService = {
   // отримати всі завдання тільки для поточного користувача
   async add(task: Omit<Todo, "id">): Promise<string> {
     const docRef = await addDoc(tasksRef, task);
+
+    vibrateOnAction();
 
     return docRef.id; // повертаємо правильний id
   },
@@ -34,11 +38,26 @@ export const TaskService = {
 
   async update(task: Todo) {
     const docRef = doc(db, "tasks", task.id);
-    await updateDoc(docRef, {
+
+    const updateData: Omit<Todo, "id"> = {
       title: task.title,
       completed: task.completed,
       userId: task.userId,
-    });
+    };
+
+    if (task.photoUrl !== undefined) {
+      updateData.photoUrl = task.photoUrl;
+    }
+
+    if (task.dueDate !== undefined) {
+      updateData.dueDate = task.dueDate;
+    }
+
+    if (task.description !== undefined) {
+      updateData.description = task.description;
+    }
+
+    await updateDoc(docRef, updateData);
   },
 
   async remove(id: string) {

@@ -9,6 +9,7 @@ type FormTodoProps = {
   inputRef: React.RefObject<HTMLInputElement | null>;
   searchTerm: string;
   setSearchTerm: (value: string) => void;
+  handleListener: () => Promise<void>;
 };
 
 export const FormTodo: React.FC<FormTodoProps> = ({
@@ -18,6 +19,7 @@ export const FormTodo: React.FC<FormTodoProps> = ({
   inputRef,
   searchTerm,
   setSearchTerm,
+  handleListener,
 }) => {
   const [isActive, setIsActive] = useState(true);
 
@@ -63,6 +65,17 @@ export const FormTodo: React.FC<FormTodoProps> = ({
           ref={inputRef}
         />
       </form>
+
+      <button
+        type="button"
+        className="todoapp__voice-button"
+        onClick={() => {
+          handleListener();
+        }}
+        aria-label="Voice input"
+      >
+        🎤
+      </button>
     </header>
   );
 };
